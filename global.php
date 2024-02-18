@@ -1,11 +1,26 @@
 <?php
-if( ! file_exists( "settings.inc" ) )
+/**
+ * OpenKJ Standalone Songbook
+ * 
+ * This is a standalone version of the OpenKJ Songbook.  It is designed to be used with the OpenKJ standalone server.
+ * 
+ * This file contains the global functions and settings for the standalone songbook.
+**/
+
+defined('IN_OPENKJ') or die('No direct script access.');
+
+$protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$siteurl = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
+define( "SITEURL", $siteurl );
+
+if( ! file_exists( "settings.php" ) )
 {
-	echo "Please copy example.settings.inc to settings.inc and edit it to configure your venue";
+	echo "Please copy example.settings.php to settings.php and edit it to configure your venue";
 	die();
 }
 
-include( "settings.inc" );
+require_once( "settings.php" );
+
 $db = new PDO("sqlite:$dbFilePath");
 
 $db->exec("CREATE TABLE IF NOT EXISTS songdb (song_id integer PRIMARY KEY AUTOINCREMENT, artist text, title  TEXT, combined TEXT UNIQUE)"); 

@@ -1,5 +1,17 @@
 <?php
-include("global.inc");
+/**
+ * OpenKJ
+ * 
+ * This is the main page for the OpenKJ application. It is the first page that is loaded when the user visits the site.
+ * 
+ * @package openkj
+ * @version 2.0.0
+ * @since 1.0.0
+ */
+
+define('IN_OPENKJ', true);
+require_once("global.php");
+
 siteheader("Home");
 navbar();
 
@@ -12,5 +24,3 @@ if ($screensize == 'xlarge')
 }
 */
 sitefooter();
-
-?>

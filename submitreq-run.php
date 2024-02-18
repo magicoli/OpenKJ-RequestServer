@@ -1,9 +1,9 @@
 <?php 
-include('global.inc');
+define('IN_OPENKJ', true);
+require_once("global.php");
+
 #header("Refresh: 15; URL=");
 siteheader("Song Submitted");
-
-
 
 $songid = $_GET['songid'];
 $singer = $_GET['singer'];

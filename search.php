@@ -1,5 +1,7 @@
 <?php 
-include('global.inc');
+define('IN_OPENKJ', true);
+require_once("global.php");
+
 siteheader('Search Results');
 navbar();
 
