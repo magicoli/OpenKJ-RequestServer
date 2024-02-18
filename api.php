@@ -1,5 +1,7 @@
 <?php
-include_once("global.php");
+define('IN_OPENKJ', true);
+require_once("includes/global.php");
+
 $json = file_get_contents("php://input");
 $data = json_decode($json,true);
 $command = $data['command'];

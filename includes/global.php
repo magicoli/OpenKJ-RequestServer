@@ -10,16 +10,17 @@
 defined('IN_OPENKJ') or die('No direct script access.');
 
 $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-$siteurl = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
-define( "SITEURL", $siteurl );
+$base_url = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['REQUEST_URI']);
+define( "BASE_URL", $base_url );
+define( "BASE_DIR", dirname( __DIR__ ) );
 
-if( ! file_exists( "settings.php" ) )
+if( ! file_exists( BASE_DIR . "/config/settings.php" ) )
 {
-	echo "Please copy example.settings.php to settings.php and edit it to configure your venue";
+	echo "Please copy config/example.settings.php to config/settings.php and edit it to configure your venue";
 	die();
 }
 
-require_once( "settings.php" );
+require_once( BASE_DIR . "/config/settings.php" );
 
 $db = new PDO("sqlite:$dbFilePath");
 
@@ -39,16 +40,17 @@ function siteheader($title)
 	global $venueName;
 	global $screensize;
 	echo "<html><head>
-		<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-		<title>$venueName - OpenKJ Karaoke Songbook</title>
-		<link rel=stylesheet type=\"text/css\" href=venuestyle.css />
-		<script type=\"text/javascript\">
-    			function submitreq(varid){
-        			window.location = \"./submitreq.php?id=\" + varid;
-    			}
-		</script>
-	      </head><body>";
+	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+	<title>$venueName - OpenKJ Karaoke Songbook</title>
+	<link rel=stylesheet type=\"text/css\" href=css/main.css />
+	<link rel=stylesheet type=\"text/css\" href=config/custom.css />
+	<script type=\"text/javascript\">
+		function submitreq(varid){
+			window.location = \"./submitreq.php?id=\" + varid;
+		}
+	</script>
+</head><body>";
 }
 
 function sitefooter() {

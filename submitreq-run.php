@@ -1,6 +1,16 @@
 <?php 
+/**
+ * OpenKJ
+ * 
+ * This is the page that is loaded when a user submits a request for a song.
+ * 
+ * @package openkj
+ * @version 2.0.0
+ * @since 1.0.0
+**/
+
 define('IN_OPENKJ', true);
-require_once("global.php");
+require_once("includes/global.php");
 
 #header("Refresh: 15; URL=");
 siteheader("Song Submitted");

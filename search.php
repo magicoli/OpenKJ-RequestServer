@@ -1,6 +1,6 @@
 <?php 
 define('IN_OPENKJ', true);
-require_once("global.php");
+require_once("includes/global.php");
 
 siteheader('Search Results');
 navbar();

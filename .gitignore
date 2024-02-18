@@ -1,2 +1,3 @@
 *.db
-settings.php
+config/settings.php
+config/custom.css
