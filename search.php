@@ -1,7 +1,7 @@
 <?php 
 include('global.inc');
 siteheader('Search Results');
-navbar("index.php");
+navbar();
 
 if ($_GET['q'] == '') {
         echo "<p>You must enter at least one search term</p>";

@@ -4,7 +4,7 @@ siteheader('Submit Request');
 $referer = $_SERVER['HTTP_REFERER'];
 if (strpos($referer,'submitreq-run.php?screensize=$screensize') !== false)
 {
-	navbar("index.php");
+	navbar();
 } else {
 	navbar($referer);
 }

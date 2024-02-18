@@ -20,7 +20,7 @@ function siteheader($title)
 	echo "<html><head>
 		<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
-		<title>$venueName Karaoke Songbook</title>
+		<title>$venueName - OpenKJ Karaoke Songbook</title>
 		<link rel=stylesheet type=\"text/css\" href=venuestyle.css />
 		<script type=\"text/javascript\">
     			function submitreq(varid){
@@ -34,14 +34,18 @@ function sitefooter() {
 	echo "</div></body></html>";
 }
 
-function navbar($backurl) 
+function navbar($backurl = "") 
 {
-	if ($backurl == "")
-		$backurl = index.php;
+	global $venueName;
 	global $screensize;
-	echo "<div class=navbar>
-	<span class=title>OpenKJ Songbook</span>
-	</div><div class=mainbody><span class=backbtn><a class=button href=\"$backurl\" class=navbar id=backlink>Back</a></span>";
+	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
+	printf(
+		"<div class=navbar>
+			<span class=title>%s</span>
+		</div><div class=mainbody><span class=backbtn><a class=button href=\"%s\" class=navbar id=backlink>Back</a></span>",
+		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
+		$backurl,
+	);
 }
 
 function setAccepting($accepting)

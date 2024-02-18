@@ -13,7 +13,7 @@ if ($singer == '') {
 	die();
 
 }
-navbar("index.php");
+navbar();
 $entries = null;
 $wherestring = null;
 $artist = '';
