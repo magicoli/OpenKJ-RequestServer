@@ -15,6 +15,8 @@ require_once("includes/global.php");
 siteheader("Home");
 navbar();
 
+echo _("Hello, world!");
+
 searchform();
 /*
 if ($screensize == 'xlarge')

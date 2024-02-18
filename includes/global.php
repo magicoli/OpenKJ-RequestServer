@@ -21,6 +21,7 @@ if( ! file_exists( BASE_DIR . "/config/settings.php" ) )
 }
 
 require_once( BASE_DIR . "/config/settings.php" );
+require_once( BASE_DIR . "/includes/translations.php" );
 
 $db = new PDO("sqlite:$dbFilePath");
 
@@ -109,7 +110,13 @@ function searchform()
 	{
 		global $url_name;
 		global $screensize;
-		echo "<br><p><form method=get action=search.php>Song search: <input type=text name=q autofocus autocomplete=off><input type=submit value=Search></form></p>";
+		echo "<div class=search-form>
+	<form method=get action=search.php>
+		<label for=q>Search for a song:</label>
+		<input type=text name=q autofocus autocomplete=off>
+		<input type=submit value=Search>
+	</form>
+</div>";
 		echo '<p class=info>You may enter any part of the artist and/or title of the song.  Partial words are allowed.</p>
 			<p class=info>For example "pai bla stone" would match "Rolling Stones, The - Paint it black".</p>';
 	}
