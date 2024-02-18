@@ -1,5 +1,11 @@
 <?php
-include("settings.inc");
+if( ! file_exists( "settings.inc" ) )
+{
+	echo "Please copy example.settings.inc to settings.inc and edit it to configure your venue";
+	die();
+}
+
+include( "settings.inc" );
 $db = new PDO("sqlite:$dbFilePath");
 
 $db->exec("CREATE TABLE IF NOT EXISTS songdb (song_id integer PRIMARY KEY AUTOINCREMENT, artist text, title  TEXT, combined TEXT UNIQUE)"); 
