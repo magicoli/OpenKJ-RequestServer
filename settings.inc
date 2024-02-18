@@ -1,5 +1,4 @@
 <?php
 
-$venueName = 'Default Venue';
-$dbFilePath = '/var/www/html/okjweb/okjweb.db';
-?>
+$venueName = "OpenKJ Venue";
+$dbFilePath = dirname(__DIR__) . '/okjweb.db';
