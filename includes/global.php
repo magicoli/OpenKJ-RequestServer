@@ -34,24 +34,45 @@ $db->exec("CREATE TABLE IF NOT EXISTS requests (request_id integer PRIMARY KEY A
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $songdbtable = "songdb";
 $requeststable = "requests";
+if (isset($_SERVER['REFERER'])) $referer = $_SERVER['REFERER'];
 
-if (isset($_SERVER['REFERER'])) $referer = $_SERVER['REFERER']; 
+function addcss( $styles) {
+	global $theme;
+	if( ! is_array( $styles ) ) $styles = array( $styles );
+	foreach ($styles as $css) {
+		if(file_exists("$css")) {
+			printf(
+				'<link rel=stylesheet type="text/css" href="%s" />', 
+				$css . '?v=' . filemtime($css),
+			);
+		}
+	}
+}
+
+function addjs( $scripts) {
+	if( ! is_array( $scripts ) ) $scripts = array( $scripts );
+	foreach ($scripts as $js) {
+		if(file_exists("$js")) {
+			printf(
+				'<script type="text/javascript" src="%s"></script>', 
+				$js . '?v=' . filemtime($js),
+			);
+		}
+	}
+}
+
 function siteheader($title) 
 {
 	global $venueName;
 	global $screensize;
+	global $theme;
 	echo "<html><head>
-	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
-	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 	<title>$venueName - OpenKJ Karaoke Songbook</title>
-	<link rel=stylesheet type=\"text/css\" href=css/main.css />
-	<link rel=stylesheet type=\"text/css\" href=config/custom.css />
-	<script type=\"text/javascript\">
-		function submitreq(varid){
-			window.location = \"./submitreq.php?id=\" + varid;
-		}
-	</script>
-</head><body>";
+	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>";
+	addcss( array( "css/main.css", "themes/$theme.css", "config/custom.css" ) );
+	addjs( array( "js/main.js" ) );
+	echo "</head><body>";
 }
 
 function sitefooter() {
