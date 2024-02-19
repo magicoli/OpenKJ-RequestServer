@@ -94,6 +94,16 @@ p {
     line-height: 1.5;
 }
 
+/* Footer styles */
+footer, footer * {
+    font-size: 1rem;
+}
+
+footer {
+    margin-top: auto;
+    text-align: center;
+}
+
 /* Add some responsive styles */
 @media (max-width: 768px) {
     .column {
@@ -101,10 +111,6 @@ p {
     }
 }
 
-/* Footer styles */
-footer {
-    margin-top: auto;
-}
 
 @media (prefers-color-scheme: dark) {
     body, header {
