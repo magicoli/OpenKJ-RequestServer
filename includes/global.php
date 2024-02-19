@@ -61,7 +61,7 @@ function addjs( $scripts) {
 	}
 }
 
-function siteheader($title) 
+function pageheader($title) 
 {
 	global $venueName;
 	global $screensize;
@@ -75,8 +75,8 @@ function siteheader($title)
 	echo "</head><body>";
 }
 
-function sitefooter() {
-	echo "</div></body></html>";
+function pagefooter() {
+	echo "</body></html>";
 }
 
 function navbar($backurl = "") 
@@ -85,12 +85,13 @@ function navbar($backurl = "")
 	global $screensize;
 	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
 	printf(
-		'<div id=navbar class=navbar>
+		'<nav id=navbar class=navbar>
 			<span class=title>%s</span>
+			%s
 			<button class="button backlink" id=button-back onclick="window.location=\'%s\'">%s</button>
-		</div>
-		<div class=mainbody>',
+		</nav>',
 		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
+		searchform(false),
 		$backurl,
 		_("Back"),
 	);
@@ -134,7 +135,7 @@ function user_notice($message, $status = "common")
 	);
 }
 
-function searchform() 
+function searchform( $echo = true ) 
 {
 	global $db;
 	global $venue_id;
@@ -147,19 +148,21 @@ function searchform()
 		global $url_name;
 		global $screensize;
 		$q = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
-		printf(
+		$html = sprintf(
 			'<div class=search-form>
-			<form method=get action=search.php>
+			<form method="get" action="%s">
 				<input type=hidden name=action value="search">
 				<input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
 				<input type=submit value=%s>
 			</form>
 			</div>',
-		   htmlspecialchars(_("Partial or full name of a song or artist")),
-		   htmlspecialchars($q),
-		   htmlspecialchars(_("Search")),
+			htmlspecialchars(BASE_URL),
+			htmlspecialchars(_("Partial or full name of a song or artist")),
+			htmlspecialchars($q),
+			htmlspecialchars(_("Search")),
 		);
 	}
+	if( $echo ) echo $html; else return $html;
 }
 
 function getSerial()

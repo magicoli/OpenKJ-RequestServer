@@ -5,7 +5,7 @@
 define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
-siteheader('Submit Request');
+pageheader('Submit Request');
 $referer = $_SERVER['HTTP_REFERER'];
 if (strpos($referer,'submitreq-run.php?screensize=$screensize') !== false)
 {

@@ -1,0 +1,63 @@
+/* Reset default styles */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Set up a responsive container */
+.container {
+    min-height: 100vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header styles */
+header nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav > * {
+    display: block;
+    margin-right: 10px;
+}
+
+/* Set up a responsive grid */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -10px;
+}
+
+.column {
+    flex: 1;
+    padding: 10px;
+}
+
+/* Add some basic styles */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* Add some responsive styles */
+@media (max-width: 768px) {
+    .column {
+        flex-basis: 100%;
+    }
+}
+
+/* Footer styles */
+footer {
+    margin-top: auto;
+}

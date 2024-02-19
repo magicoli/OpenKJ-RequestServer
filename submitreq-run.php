@@ -13,7 +13,7 @@ define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
 #header("Refresh: 15; URL=");
-siteheader("Song Submitted");
+pageheader("Song Submitted");
 
 $songid = $_GET['songid'];
 $singer = $_GET['singer'];
@@ -41,5 +41,5 @@ echo "<p>Song: $artist - $title</p>
 	<br><p>Please press back to return to the main screen</p>
 ";
 
-sitefooter();
+pagefooter();
 ?> 

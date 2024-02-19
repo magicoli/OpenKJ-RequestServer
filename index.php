@@ -12,12 +12,19 @@
 define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
-siteheader("Home");
-navbar();
+pageheader("Home");
 
+echo "<div class=container>";
+echo "<header>";
+navbar();
+echo "</header>";
+echo "<div class=content>";
 echo _("Hello, world!");
 
-searchform();
+if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
+    include("includes/search.php");
+}
+
 /*
 if ($screensize == 'xlarge')
 {
@@ -25,4 +32,12 @@ if ($screensize == 'xlarge')
 ";
 }
 */
-sitefooter();
+echo "</div>"; // end content
+
+echo "<footer>";
+echo "<p class=info>Powered by OpenKJ and Magiiic</p>";
+echo "</footer>";
+
+echo "</div>"; // end container
+
+pagefooter();

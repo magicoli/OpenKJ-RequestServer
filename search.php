@@ -2,7 +2,7 @@
 define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
-siteheader('Search Results');
+pageheader('Search Results');
 navbar();
 
 if ($_GET['q'] == '') {
@@ -67,5 +67,5 @@ if (count($unique) > 0) {
 	echo "<p>Sorry, no match found.</p>";
 }
 
-sitefooter();
+pagefooter();
 ?> 
