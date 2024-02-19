@@ -27,12 +27,17 @@ echo "<header>";
 navbar();
 echo "</header>";
 echo "<div id=main-content class=content>";
+
 if( ! empty($notifications)) {
-    echo sprintf(
-        "<div class=notifications>%s</div>",
-        $notifications,
-    );
+    if( ! empty( $notifications) ) {
+        echo "<div class=notifications>";
+        foreach ($notifications as $notice) {
+            echo $notice;
+        }
+        echo "</div>";
+    }
 }
+
 if( ! empty($content)) {
     echo sprintf(
         "<div class=content>%s</div>",

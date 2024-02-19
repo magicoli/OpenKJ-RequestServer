@@ -1,9 +1,9 @@
 <?php 
 
 if ($_REQUEST['q'] == '') {
-    user_notice("You must enter at least one search term", "error");
+    add_notice("You must enter at least one search term", "error");
 } else if (strlen($_REQUEST['q']) < 3) {
-    user_notice("Your search string was too short, please try again", "error");
+    add_notice("Your search string was too short, please try again", "error");
 } else {
     $content = "";
 

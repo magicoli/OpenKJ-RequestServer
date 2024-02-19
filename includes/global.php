@@ -123,11 +123,13 @@ function getAccepting()
 	return $accepting;
 }
 
-function user_notice($message, $status = "common")
+function add_notice($message, $status = "general")
 {
+	global $notifications;
+
 	if(empty($message)) return;
 
-	printf( 
+	$notifications[] = sprintf (
 		'<div class="notice notice-%s">%s</div>',
 		$status,
 		$message,
@@ -141,7 +143,7 @@ function searchform( $echo = true )
 	global $search_summary;
 	if (!getAccepting())
 	{
-		user_notice ( _( "Heads up, we're not taking requests at the moment." ), "error" );
+		add_notice ( _( "Heads up, we're not taking requests at the moment." ), "error" );
 	}
 	else
 	{
