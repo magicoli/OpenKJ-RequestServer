@@ -12,9 +12,6 @@
 define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
-
-pageheader( $page );
-
 if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
     $page = _( "Search result" );
     include("includes/search.php");
@@ -22,6 +19,9 @@ if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
     $page = _( "Home" );
     $content = _( "Welcome to the karaoke, please use the search box to find a song to sing." );
 }
+
+pageheader( $page );
+
 echo "<div class=container>";
 echo "<header>";
 navbar();
