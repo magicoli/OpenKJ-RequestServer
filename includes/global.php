@@ -163,7 +163,7 @@ function searchform( $echo = true )
 			</div>',
 			htmlspecialchars(BASE_URL),
 			$search_summary,
-			htmlspecialchars(_("Partial or full name of a song or artist")),
+			htmlspecialchars(_("Song or artist")),
 			htmlspecialchars($q),
 			htmlspecialchars(_("Search")),
 		);
