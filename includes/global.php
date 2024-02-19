@@ -64,14 +64,18 @@ function navbar($backurl = "")
 	global $screensize;
 	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
 	printf(
-		"<div class=navbar>
+		'<div id=navbar class=navbar>
 			<span class=title>%s</span>
-		</div><div class=mainbody><span class=backbtn><a class=button href=\"%s\" class=navbar id=backlink>Back</a></span>",
+			<button class="button backlink" id=button-back onclick="window.location=\'%s\'">%s</button>
+		</div>
+		<div class=mainbody>',
 		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
 		$backurl,
+		_("Back"),
 	);
 }
 
+// TODO: seems to belong to api
 function setAccepting($accepting)
 {
 	global $db;
@@ -98,31 +102,43 @@ function getAccepting()
 	return $accepting;
 }
 
+function user_notice($message, $status = "common")
+{
+	if(empty($message)) return;
+
+	printf( 
+		'<div class="notice notice-%s">%s</div>',
+		$status,
+		$message,
+	);
+}
+
 function searchform() 
 {
 	global $db;
 	global $venue_id;
 	if (!getAccepting())
 	{
-		echo "<br><br><h2>Sorry, requests are not being accepted at this time</h2>";
+		user_notice ( _( "Heads up, we're not taking requests at the moment." ), "error" );
 	}
 	else
 	{
 		global $url_name;
 		global $screensize;
-		echo "<div class=search-form>
-	<form method=get action=search.php>
-		<label for=q>Search for a song:</label>
-		<input type=text name=q autofocus autocomplete=off>
-		<input type=submit value=Search>
-	</form>
-</div>";
-		echo '<p class=info>You may enter any part of the artist and/or title of the song.  Partial words are allowed.</p>
-			<p class=info>For example "pai bla stone" would match "Rolling Stones, The - Paint it black".</p>';
+		$q = isset($_REQUEST['q']) ? $_GET['q'] : '';
+		printf(
+			'<div class=search-form>
+		   <form method=get action=search.php>
+			   <input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
+			   <input type=submit value=%s>
+		   </form>
+		   </div>',
+		   htmlspecialchars(_("Partial or full name of a song or artist")),
+		   htmlspecialchars($q),
+		   htmlspecialchars(_("Search")),
+		);
 	}
 }
-
-
 
 function getSerial()
 {
@@ -156,7 +172,7 @@ function getVenue()
         $serial = -1;
 	$venue = array();
 	$venue['venue_id'] = $venue_id;
-        $venue['accepting'] = getAccepting();
+	$venue['accepting'] = getAccepting();
 	$venue['name'] = $venueName;
 	$venue['url_name'] = "none";
 	return $venue;
