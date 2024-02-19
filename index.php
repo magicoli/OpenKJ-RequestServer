@@ -55,7 +55,9 @@ if ($screensize == 'xlarge')
 echo "</div>"; // end content
 
 echo "<footer>";
-echo "<p class=info>Powered by OpenKJ and Magiiic</p>";
+echo '<p class=info>Powered by 
+<a href="http://openkj.org">OpenKJ</a> 
+and <a href="https://magiiic.com/">Magiiic</a></p>';
 echo "</footer>";
 
 echo "</div>"; // end container
