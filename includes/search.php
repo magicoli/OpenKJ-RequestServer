@@ -1,9 +1,9 @@
 <?php 
 
 if ($_REQUEST['q'] == '') {
-    add_notice("You must enter at least one search term", "error");
+    add_notice("You must give at least one search term.", "error");
 } else if (strlen($_REQUEST['q']) < 3) {
-    add_notice("Your search string was too short, please try again", "error");
+    add_notice("Your search string was too short, please try again.", "error");
 } else {
     $content = "";
 
@@ -55,7 +55,8 @@ if ($_REQUEST['q'] == '') {
         }
         $content .= '</table>';
     } else {
-        $search_summary = _( "No match found" );
+        add_notice(_("Nothing found, try to be less specific. For example, you can type a word in the title instead of the full title.") );
+        $search_summary = _( "No result" );
     }
     $content = sprintf(
         '<div class=search-result>
