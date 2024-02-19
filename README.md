@@ -1,4 +1,9 @@
 # OpenKJ Standalone Request Server
+
+This fork is a work in progress. It is an attempt to mordernize the presentation and the coding methods of the original [OpenKJ/StandaloneRequestServer](https://github.com/OpenKJ/StandaloneRequestServer). While it is functional, it does not fit the goals yet.
+
+## Original README:
+
 Standalone basic single-venue request server implementation for use with OpenKJ.
 
 Note: This is intended for people who already know how to configure and manage their own webservers and have a general familiarity with php.  The easier and more feature rich option is to use the hosted service available at https://okjsongbook.com
