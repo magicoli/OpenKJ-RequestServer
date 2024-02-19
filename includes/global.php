@@ -79,12 +79,12 @@ function pagefooter() {
 	echo "</body></html>";
 }
 
-function navbar($backurl = "") 
+function navbar($backurl = "", $echo = true) 
 {
 	global $venueName;
 	global $screensize;
 	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
-	printf(
+	$nav = sprintf(
 		'<nav id=navbar class=navbar>
 			<h1 class=site-title>%s</h1>
 			%s
@@ -92,8 +92,8 @@ function navbar($backurl = "")
 		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
 		searchform(false),
 		$backurl,
-		_("Back"),
 	);
+	if( $echo ) echo $nav; else return $nav;
 }
 
 // TODO: seems to belong to api
@@ -138,6 +138,7 @@ function searchform( $echo = true )
 {
 	global $db;
 	global $venue_id;
+	global $search_summary;
 	if (!getAccepting())
 	{
 		user_notice ( _( "Heads up, we're not taking requests at the moment." ), "error" );
@@ -150,12 +151,14 @@ function searchform( $echo = true )
 		$html = sprintf(
 			'<div class=search-form>
 			<form method="get" action="%s">
+				<label class=search-summary for=q>%s</label>
 				<input type=hidden name=action value="search">
 				<input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
 				<input type=submit value=%s>
 			</form>
 			</div>',
 			htmlspecialchars(BASE_URL),
+			$search_summary,
 			htmlspecialchars(_("Partial or full name of a song or artist")),
 			htmlspecialchars($q),
 			htmlspecialchars(_("Search")),

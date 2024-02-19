@@ -12,17 +12,32 @@
 define('IN_OPENKJ', true);
 require_once("includes/global.php");
 
-pageheader("Home");
 
+pageheader( $page );
+
+if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
+    $page = _( "Search result" );
+    include("includes/search.php");
+} else {
+    $page = _( "Home" );
+    $content = _( "Welcome to the karaoke, please use the search box to find a song to sing." );
+}
 echo "<div class=container>";
 echo "<header>";
 navbar();
 echo "</header>";
 echo "<div id=main-content class=content>";
-echo _("Hello, world!");
-
-if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
-    include("includes/search.php");
+if( ! empty($notifications)) {
+    echo sprintf(
+        "<div class=notifications>%s</div>",
+        $notifications,
+    );
+}
+if( ! empty($content)) {
+    echo sprintf(
+        "<div class=content>%s</div>",
+        $content,
+    );
 }
 
 /*

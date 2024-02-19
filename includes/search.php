@@ -5,8 +5,7 @@ if ($_REQUEST['q'] == '') {
 } else if (strlen($_REQUEST['q']) < 3) {
     user_notice("Your search string was too short, please try again", "error");
 } else {
-
-    $content = "<h1>Search Results</h1>";
+    $content = "";
 
     $terms = explode(' ',$_REQUEST['q']);
     $no = count($terms);
@@ -33,28 +32,35 @@ if ($_REQUEST['q'] == '') {
 
     $entries = null;
     $res = array();
-        $sql = "SELECT song_id,artist,title,combined FROM songdb $wherestring ORDER BY UPPER(artist), UPPER(title)";
-        foreach ($db->query($sql) as $row)
-            {
+    $sql = "SELECT song_id,artist,title,combined FROM songdb $wherestring ORDER BY UPPER(artist), UPPER(title)";
+    foreach ($db->query($sql) as $row) {
         if ((stripos($row['combined'],'wvocal') === false) && (stripos($row['combined'],'w-vocal') === false) && (stripos($row['combined'],'vocals') === false)) {
             $res[$row['song_id']] = $row['artist'] . " - " . $row['title'];
         }
-            }
-        $db = null;
-
+    }
+        
     $unique = array_unique($res);
 
     foreach ($unique as $key => $val) {
-        $entries[] = "<tr><td class=result onclick=\"submitreq(${key})\">" . $val . "</td></tr>";
+        $entries[] = "<tr><td class=summary onclick=\"submitreq(${key})\">" . $val . "</td></tr>";
     }
     if (count($unique) > 0) {
+        $search_summary = sprintf(
+            _("Found %s songs"), 
+            count($unique),
+        );
         $content .= '<table border=1>';
         foreach ($entries as $song) {
             $content .= $song;
         }
         $content .= '</table>';
     } else {
-        $content .= "<p>Sorry, no match found.</p>";
+        $search_summary = _( "No match found" );
     }
-    echo $content;
+    $content = sprintf(
+        '<div class=search-result>
+            <div class=result>%s</div>
+        </div>',
+        $content,
+    );
 }
