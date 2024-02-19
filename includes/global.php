@@ -125,14 +125,15 @@ function searchform()
 	{
 		global $url_name;
 		global $screensize;
-		$q = isset($_REQUEST['q']) ? $_GET['q'] : '';
+		$q = isset($_REQUEST['q']) ? $_REQUEST['q'] : '';
 		printf(
 			'<div class=search-form>
-		   <form method=get action=search.php>
-			   <input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
-			   <input type=submit value=%s>
-		   </form>
-		   </div>',
+			<form method=get action=search.php>
+				<input type=hidden name=action value="search">
+				<input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
+				<input type=submit value=%s>
+			</form>
+			</div>',
 		   htmlspecialchars(_("Partial or full name of a song or artist")),
 		   htmlspecialchars($q),
 		   htmlspecialchars(_("Search")),
