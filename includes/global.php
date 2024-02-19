@@ -86,12 +86,14 @@ function navbar($backurl = "", $echo = true)
 	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
 	$nav = sprintf(
 		'<nav id=navbar class=navbar>
-			<h1 class=site-title>%s</h1>
+			<a href="%s" class=home-link>
+				<h1 class=site-title>%s</h1>
+			</a>
 			%s
 		</nav>',
+		BASE_URL,
 		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
 		searchform(false),
-		$backurl,
 	);
 	if( $echo ) echo $nav; else return $nav;
 }
@@ -123,7 +125,7 @@ function getAccepting()
 	return $accepting;
 }
 
-function add_notice($message, $status = "general")
+function add_notice($message, $status = "info")
 {
 	global $notifications;
 
