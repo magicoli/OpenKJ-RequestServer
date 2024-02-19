@@ -66,6 +66,40 @@ nav > * {
     display: block;
     /* margin-right: 10px; */
 }
+.search-result ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.artists {
+    columns: 20rem auto;
+    gap: 1em;
+}
+li.artist {
+    margin-bottom: 1em;
+    /* disallow column break */
+    break-inside: avoid;
+}
+
+ul.songs {
+    margin: 0.5em 0;
+    border-collapse: collapse;
+}
+li.song {
+    cursor: pointer;
+    padding: 0.5em;
+    border: solid 1px var(--dark-color);
+}
+li.song:hover, li.song:active {
+    background-color: var(--dark-color);
+    color: var(--success-color);
+}
+li.song:hover:after {
+    /* add a large right chevron unicode icon before text to indicate that the song can be clicked */
+    content: "\3009";
+    padding-left: 0.5em;
+}
 
 /* Set up a responsive container */
 #main-content {
@@ -143,8 +177,13 @@ footer p {
     body, header {
         background-color: var(--dark-color);
         color: var(--light-color);
+        border-color: var(--light-color);
     }
-    header {
-        border-bottom-color: var(--light-color);
+    li.song:hover, li.song:active {
+        background-color: var(--light-color);
+        color: var(--dark-color);
+    }
+    header, li.song {
+        border-color: var(--light-color);
     }
 }

@@ -36,24 +36,42 @@ if ($_REQUEST['q'] == '') {
     foreach ($db->query($sql) as $row) {
         if ((stripos($row['combined'],'wvocal') === false) && (stripos($row['combined'],'w-vocal') === false) && (stripos($row['combined'],'vocals') === false)) {
             $res[$row['song_id']] = $row['artist'] . " - " . $row['title'];
+            $details[$row['song_id']] = array(
+                'artist' => $row['artist'],
+                'title' => $row['title'],
+            );
         }
     }
         
     $unique = array_unique($res);
 
     foreach ($unique as $key => $val) {
-        $entries[] = "<tr><td class=summary onclick=\"submitreq(${key})\">" . $val . "</td></tr>";
+        $song = $details[$key];
+        $artist = $song['artist'];
+        $entries[$artist][] = sprintf(
+            '<li class=song onclick="submitreq(%s)">%s</li>',
+            $key,
+            htmlspecialchars($song['title']),
+        );
     }
-    if (count($unique) > 0) {
+    if (count($res) > 0) {
         $search_summary = sprintf(
             _("Found %s songs"), 
             count($unique),
         );
-        $content .= '<table border=1>';
-        foreach ($entries as $song) {
-            $content .= $song;
+        $content .= '<ul class=artists>';
+        foreach ($entries as $artist => $songs) {
+            $content .= sprintf(
+                '<li class=artist>%s',
+                htmlspecialchars($artist),
+            );
+            $content .= '<ul class=songs>';
+            foreach ($songs as $song) {
+                $content .= $song;
+            }
+            $content .= '</ul></li>';
         }
-        $content .= '</table>';
+        $content .= '</ul>';
     } else {
         add_notice(_("Nothing found, try to be less specific. For example, you can type a word in the title instead of the full title.") );
         $search_summary = _( "No result" );
