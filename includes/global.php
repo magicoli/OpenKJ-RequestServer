@@ -156,7 +156,7 @@ function searchform( $echo = true )
 		$html = sprintf(
 			'<div class=search-form>
 			<form method="get" action="%s">
-				<label class=search-summary for=q>%s</label>
+				<label class=search-summary>%s</label>
 				<input type=hidden name=action value="search">
 				<input type=text name=q id=q placeholder="%s" value="%s" autofocus autocomplete=off>
 				<input type=submit value=%s>

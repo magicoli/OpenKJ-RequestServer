@@ -39,8 +39,12 @@ header nav {
     justify-content: space-between;
 }
 
+header nav > h1 {
+    /* disallow line break */
+    white-space: nowrap;
+}
 header form {
-    display: flex;
+    display: inline-flex;
     gap: 10px;
     margin-block-end: 0;
 }
@@ -164,14 +168,15 @@ footer p {
     }
 }
 
-
 /* Add some responsive styles */
-@media (max-width: 768px) {
-    .column {
-        flex-basis: 100%;
+@media (max-width: 640px) {
+    body {
+        font-size: 18px;
+    }
+    header nav {
+        flex-direction: column;
     }
 }
-
 
 @media (prefers-color-scheme: dark) {
     body, header {
