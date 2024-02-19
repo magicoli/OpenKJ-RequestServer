@@ -67,6 +67,7 @@ function pageheader($title)
 	global $screensize;
 	global $theme;
 	echo "<html><head>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<title>$venueName - OpenKJ Karaoke Songbook</title>
 	<link href='https://fonts.googleapis.com/css?family=Audiowide' rel='stylesheet'>
 	<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>";
