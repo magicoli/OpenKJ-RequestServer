@@ -86,9 +86,8 @@ function navbar($backurl = "")
 	if ( empty($backurl) || $backurl == "index.php" ) $backurl = dirname( getenv( "REQUEST_URI" ) );
 	printf(
 		'<nav id=navbar class=navbar>
-			<span class=title>%s</span>
+			<h1 class=site-title>%s</h1>
 			%s
-			<button class="button backlink" id=button-back onclick="window.location=\'%s\'">%s</button>
 		</nav>',
 		( empty($venueName ) ? "OpenKJ Songbook" : $venueName ),
 		searchform(false),

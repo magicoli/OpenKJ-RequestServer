@@ -18,7 +18,7 @@ echo "<div class=container>";
 echo "<header>";
 navbar();
 echo "</header>";
-echo "<div class=content>";
+echo "<div id=main-content class=content>";
 echo _("Hello, world!");
 
 if (isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'search') {
