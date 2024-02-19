@@ -5,12 +5,11 @@
     --info-color: #17a2b8;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
-    --light-color: #f8f9fa;
-    --dark-color: #343a40;
+    --light-color: #d1d1d1;
+    --dark-color: #191b1c;
 }
 
 body {
-    background-color: white;
     color: var(--dark-color);
     background: var(--light-color)
 }
